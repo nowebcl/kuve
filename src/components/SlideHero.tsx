@@ -1,14 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Terminal } from "lucide-react";
+import { Terminal } from "lucide-react";
 
 interface SlideHeroProps {
   onInitiateProject: () => void;
 }
 
 export default function SlideHero({ onInitiateProject }: SlideHeroProps) {
-  const headingText = "NEXT-GENERATION TECH DEVELOPMENT";
+  const headingText = "INGENIERÍA DIGITAL DE ALTO RENDIMIENTO";
   const words = headingText.split(" ");
 
   const containerVariants = {
@@ -46,9 +46,8 @@ export default function SlideHero({ onInitiateProject }: SlideHeroProps) {
           transition={{ duration: 0.6 }}
           className="flex items-center gap-2"
         >
-          <span className="h-1.5 w-1.5 rounded-full bg-brand-violet animate-pulse" />
-          <span className="text-[9px] uppercase tracking-[0.25em] font-mono text-gray-500 font-light">
-            SYS.RUNNING // AI_EXPERIENCE
+          <span className="text-[9px] uppercase tracking-[0.25em] font-mono text-gray-500 font-normal">
+            ● SYS.RUNNING // AI_EXPERIENCE
           </span>
         </motion.div>
       </div>
@@ -87,7 +86,7 @@ export default function SlideHero({ onInitiateProject }: SlideHeroProps) {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-[10px] font-mono uppercase tracking-[0.4em] text-brand-violet mb-3 font-light"
+          className="text-[10px] font-mono uppercase tracking-[0.4em] text-brand-violet mb-3 font-normal"
         >
           KUVE
         </motion.div>
@@ -111,15 +110,14 @@ export default function SlideHero({ onInitiateProject }: SlideHeroProps) {
           ))}
         </motion.h1>
 
-        {/* Delicate Centered Subtitle */}
+        {/* Delicate Centered Subtitle (Line Height 1.6 & Proxima Nova Light) */}
         <motion.p
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-6 text-xs md:text-sm text-[#8E8E8E] font-light max-w-xl leading-relaxed font-sans"
+          className="mt-6 text-xs md:text-sm text-[#8E8E8E] font-light max-w-2xl leading-[1.6] font-sans"
         >
-          High-level software development and advanced AI automation for enterprise scaling. 
-          We engineer dynamic digital architectures that propel global market leaders.
+          Desarrollo de software corporativo de alto nivel y automatización avanzada con IA para escala empresarial. Diseñamos arquitecturas digitales dinámicas que impulsan a los líderes del mercado global.
         </motion.p>
 
         {/* Centered CTA Button */}
@@ -132,11 +130,10 @@ export default function SlideHero({ onInitiateProject }: SlideHeroProps) {
           <button
             onClick={onInitiateProject}
             data-cursor="pointer"
-            className="group relative px-6 py-3 rounded border border-white/10 hover:border-white/30 bg-[#0B0B0B]/85 text-xs font-mono tracking-widest text-white transition-all duration-300 active:scale-98 font-light"
+            className="group relative px-6 py-3 rounded border border-white/10 hover:border-white/30 bg-[#0B0B0B]/85 text-xs font-mono tracking-widest text-white transition-all duration-300 active:scale-98 font-normal"
           >
-            <span className="flex items-center gap-3">
-              [ ENTER SYSTEMS ] 
-              <ArrowRight className="w-3 h-3 text-brand-purple transition-transform duration-300 group-hover:translate-x-1" />
+            <span className="flex items-center justify-center">
+              [ INICIAR SISTEMAS ] →
             </span>
           </button>
         </motion.div>
