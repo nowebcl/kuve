@@ -1,26 +1,105 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0A0A0A;
+  --foreground: #F3F4F6;
+  --font-poppins: var(--font-poppins);
+  --font-inter: var(--font-inter);
 }
 
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-brand-violet: #6366F1;
+  --color-brand-purple: #A855F7;
+  --color-brand-magenta: #EC4899;
+  
+  --font-poppins: var(--font-poppins);
+  --font-montserrat: var(--font-poppins);
+  --font-sans: var(--font-inter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Rigid Canvas Setup */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #0A0A0A;
+  color: #F3F4F6;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  touch-action: none;
+}
+
+/* Scrollbar Hide */
+::-webkit-scrollbar {
+  display: none;
+  width: 0px;
+  background: transparent;
+}
+
+* {
+  box-sizing: border-box;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Custom selection */
+::selection {
+  background: rgba(168, 85, 247, 0.25);
+  color: #FFFFFF;
+}
+
+/* Glowing Border Helper Utility */
+.gradient-border-glow {
+  position: relative;
+  background: linear-gradient(135deg, #0A0A0A, #121212);
+  border-radius: 12px;
+  z-index: 1;
+}
+
+.gradient-border-glow::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  border-radius: 13px;
+  padding: 1px;
+  background: linear-gradient(135deg, #6366F1, #A855F7, #EC4899);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+  transition: opacity 0.5s ease;
+  opacity: 0.5;
+}
+
+.gradient-border-glow:hover::before {
+  opacity: 1;
+}
+
+/* Dot grid background */
+.bg-grid-dots {
+  background-size: 24px 24px;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+}
+
+/* Gentle Floating Animation for Parallax Backdrop */
+@keyframes gentle-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg) scale(1.05);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0.4deg) scale(1.07);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.animate-gentle-float {
+  animation: gentle-float 22s ease-in-out infinite;
 }
