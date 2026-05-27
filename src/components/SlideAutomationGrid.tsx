@@ -78,7 +78,7 @@ export default function SlideAutomationGrid() {
   ];
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between p-6 md:p-12 bg-[#0A0A0A] bg-grid-dots overflow-hidden">
+    <div className="relative w-full h-full flex flex-col justify-between p-6 md:p-12 bg-transparent overflow-hidden">
       
       {/* Subtle faint glow on hover */}
       <div 
@@ -93,23 +93,23 @@ export default function SlideAutomationGrid() {
         }}
       />
 
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center z-10 w-full pt-10">
+      {/* Header with Centered/Left-aligned copy deck */}
+      <div className="flex flex-col justify-start items-start z-10 w-full pt-10">
         <div>
-          <span className="text-[9px] uppercase tracking-[0.25em] font-mono text-brand-purple">
-            ACTIVE PIPELINE MESH
+          <span className="text-[9px] uppercase tracking-[0.25em] font-mono text-brand-purple font-light">
+            01 // CORE ARCHITECTURE
           </span>
-          <h2 className="text-xl md:text-2xl font-montserrat font-light tracking-tight mt-1 text-white">
-            ENTERPRISE AUTOMATION GRID
+          <h2 className="text-xl md:text-2xl font-poppins font-bold tracking-tight mt-1 text-white">
+            Ingeniería de Software sin Concesiones.
           </h2>
-        </div>
-        <div className="mt-1 sm:mt-0 text-[8px] text-gray-600 font-mono">
-          Hover individual modules to query packet flows.
+          <p className="text-xs text-[#8E8E8E] font-light max-w-2xl mt-2 font-sans leading-relaxed">
+            Diseñamos y automatizamos la infraestructura digital de corporaciones globales. Aplicaciones robustas, arquitectura escalable y automatización inteligente ejecutada por expertos.
+          </p>
         </div>
       </div>
 
       {/* Interactive Grid Canvas */}
-      <div className="relative flex-1 w-full my-4 min-h-[300px] z-10">
+      <div className="relative flex-1 w-full my-4 min-h-[250px] z-10">
         <svg className="absolute inset-0 w-full h-full pointer-events-none">
           {nodes.map((node) => 
             node.connections.map((targetId) => {
@@ -166,7 +166,7 @@ export default function SlideAutomationGrid() {
               >
                 {/* Micro Border card */}
                 <div 
-                  className="flex items-center gap-3 px-3.5 py-2.5 rounded border bg-[#0C0C0C] backdrop-blur-md transition-all duration-300"
+                  className="flex items-center gap-3 px-3.5 py-2.5 rounded border bg-[#0C0C0C]/90 backdrop-blur-md transition-all duration-300"
                   style={{
                     borderColor: isNodeHovered ? node.color : "rgba(255,255,255,0.06)",
                     boxShadow: isNodeHovered ? `0 0 12px ${node.color}15` : "none",
@@ -182,7 +182,7 @@ export default function SlideAutomationGrid() {
                     <Icon className="w-3.5 h-3.5" />
                   </div>
                   <div>
-                    <h3 className="text-[8px] font-mono tracking-widest text-gray-600 leading-none">
+                    <h3 className="text-[8px] font-mono tracking-widest text-gray-600 leading-none font-light">
                       {node.role}
                     </h3>
                     <p className="text-xs font-light tracking-wide text-white mt-1">
@@ -197,7 +197,7 @@ export default function SlideAutomationGrid() {
       </div>
 
       {/* Structured Minimal Diagnostic Bar */}
-      <div className="h-14 z-10 w-full border-t border-white/5 flex items-center justify-between px-2 font-mono text-[9px] text-gray-500 overflow-hidden">
+      <div className="h-12 z-10 w-full border-t border-white/5 flex items-center justify-between px-2 font-mono text-[9px] text-[#4E4E4E] overflow-hidden">
         <AnimatePresence mode="wait">
           {hoveredNode ? (
             <motion.div
@@ -209,7 +209,7 @@ export default function SlideAutomationGrid() {
             >
               <div className="flex items-center gap-2">
                 <span 
-                  className="px-1.5 py-0.5 rounded text-[8px]"
+                  className="px-1.5 py-0.5 rounded text-[8px] font-light"
                   style={{
                     backgroundColor: `${nodes.find(n => n.id === hoveredNode)?.color}15`,
                     color: nodes.find(n => n.id === hoveredNode)?.color
@@ -217,12 +217,12 @@ export default function SlideAutomationGrid() {
                 >
                   SYS:{hoveredNode.toUpperCase()}
                 </span>
-                <span className="text-[#8E8E8E] hidden md:inline">Synchronous dynamic routing core validation.</span>
+                <span className="text-[#8E8E8E] hidden md:inline font-light">Synchronous dynamic routing validation core.</span>
               </div>
 
               <div className="flex gap-4">
                 {nodes.find(n => n.id === hoveredNode)?.details.map((detail, i) => (
-                  <div key={i} className="flex items-center gap-1.5 text-gray-400">
+                  <div key={i} className="flex items-center gap-1.5 text-gray-400 font-light">
                     <span 
                       className="w-1 h-1 rounded-full" 
                       style={{ backgroundColor: nodes.find(n => n.id === hoveredNode)?.color }}
@@ -237,10 +237,15 @@ export default function SlideAutomationGrid() {
               key="default"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="flex items-center justify-center w-full gap-2 text-gray-600 uppercase"
+              className="flex items-center justify-between w-full font-mono text-[9px]"
             >
-              <Network className="w-3.5 h-3.5 text-brand-purple" />
-              Hover node points to analyze pipeline statistics.
+              <div className="flex items-center gap-2 text-brand-purple">
+                <span className="h-1.5 w-1.5 rounded-full bg-brand-purple animate-pulse" />
+                STATUS: SYSTEM_ACTIVE
+              </div>
+              <div className="text-gray-600 font-light">
+                EFFICIENCY: OPTIMIZING_OPERATIONS_100%
+              </div>
             </motion.div>
           )}
         </AnimatePresence>

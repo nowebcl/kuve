@@ -59,7 +59,7 @@ function ParallaxCard({ item }: { item: CaseStudy }) {
         rotateY,
         transformStyle: "preserve-3d",
       }}
-      className="relative flex-1 h-[360px] rounded border border-white/5 bg-[#0C0C0C]/80 backdrop-blur-md overflow-hidden cursor-pointer select-none transition-colors duration-300 hover:border-white/15"
+      className="relative flex-1 h-[320px] rounded border border-white/5 bg-[#0C0C0C]/80 backdrop-blur-md overflow-hidden cursor-pointer select-none transition-colors duration-300 hover:border-white/15"
       data-cursor="pointer"
     >
       <div 
@@ -78,7 +78,7 @@ function ParallaxCard({ item }: { item: CaseStudy }) {
             <div className="p-1 rounded text-white" style={{ backgroundColor: `${item.color}15` }}>
               <Icon className="w-3.5 h-3.5" />
             </div>
-            <span className="text-[8px] font-mono uppercase tracking-[0.2em] text-gray-500">
+            <span className="text-[8px] font-mono uppercase tracking-[0.2em] text-gray-500 font-light">
               {item.category}
             </span>
           </div>
@@ -90,10 +90,10 @@ function ParallaxCard({ item }: { item: CaseStudy }) {
           style={{ x: textTranslateX, y: textTranslateY }}
           className="my-auto space-y-2"
         >
-          <h3 className="text-lg font-montserrat font-light text-white tracking-wide">
+          <h3 className="text-lg font-poppins font-bold text-white tracking-wide">
             {item.title}
           </h3>
-          <p className="text-[11px] text-gray-500 font-sans leading-relaxed">
+          <p className="text-[11px] text-gray-500 font-sans leading-relaxed font-light">
             {item.tagline}
           </p>
         </motion.div>
@@ -101,19 +101,19 @@ function ParallaxCard({ item }: { item: CaseStudy }) {
         {/* Bottom Metrics */}
         <div className="border-t border-white/5 pt-4 flex items-center justify-between">
           <div>
-            <div className="text-xl font-montserrat font-thin text-white">
+            <div className="text-xl font-poppins font-bold text-white">
               {item.metrics}
             </div>
-            <div className="text-[8px] font-mono text-gray-600 uppercase tracking-widest mt-0.5">
+            <div className="text-[8px] font-mono text-gray-600 uppercase tracking-widest mt-0.5 font-light">
               {item.metricLabel}
             </div>
           </div>
 
           <div className="text-right">
-            <div className="text-[8px] font-mono text-gray-600 tracking-wider">
+            <div className="text-[8px] font-mono text-gray-600 tracking-wider font-light">
               PATH
             </div>
-            <div className="text-[9px] font-mono text-white tracking-widest mt-0.5">
+            <div className="text-[9px] font-mono text-white tracking-widest mt-0.5 font-light">
               {item.systemSpec}
             </div>
           </div>
@@ -162,20 +162,20 @@ export default function SlidePortfolio() {
   ];
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between p-6 md:p-12 bg-[#0A0A0A] bg-grid-dots overflow-hidden">
+    <div className="relative w-full h-full flex flex-col justify-between p-6 md:p-12 bg-transparent overflow-hidden">
       
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center z-10 w-full pt-10">
+      <div className="flex flex-col justify-start items-start z-10 w-full pt-10">
         <div>
-          <span className="text-[9px] uppercase tracking-[0.25em] font-mono text-brand-magenta">
-            PRODUCTION LOG
+          <span className="text-[9px] uppercase tracking-[0.25em] font-mono text-brand-magenta font-light">
+            02 // VELOCITY OPTIMIZATION
           </span>
-          <h2 className="text-xl md:text-2xl font-montserrat font-light tracking-tight mt-1 text-white">
-            CASE STUDIES & PRODUCTS
+          <h2 className="text-xl md:text-2xl font-poppins font-bold tracking-tight mt-1 text-white">
+            Velocidad que Desafía la Gravedad.
           </h2>
-        </div>
-        <div className="mt-1 sm:mt-0 text-[8px] text-gray-600 font-mono">
-          Interactive catalog. Tilt physical modules to query metrics.
+          <p className="text-xs text-[#8E8E8E] font-light max-w-2xl mt-2 font-sans leading-relaxed">
+            Cada milisegundo es capital. Desarrollamos soluciones web optimizadas a nivel de bit, garantizando interfaces instantáneas, fluidas y de alto impacto para el usuario final.
+          </p>
         </div>
       </div>
 
@@ -186,14 +186,15 @@ export default function SlidePortfolio() {
         ))}
       </div>
 
-      {/* Footer */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-t border-white/5 pt-4 z-10 w-full">
-        <div className="text-[9px] font-mono text-gray-600 uppercase tracking-widest">
-          // CLIENT METRICS COMPLETED BY KUVE S.A.
+      {/* Footer / Performance Metrics */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-t border-white/5 pt-4 z-10 w-full gap-2 font-mono text-[9px] text-[#4E4E4E]">
+        <div className="flex gap-4 sm:gap-6 uppercase">
+          <div className="font-light">// GAUGE: SPEED INDEX</div>
+          <div className="text-brand-magenta font-light">// COUNTER: LOAD TIME: 0.23s</div>
         </div>
-        <div className="mt-1 sm:mt-0 text-[8px] font-mono text-gray-500 uppercase tracking-widest flex items-center gap-1.5">
-          <span className="w-1 h-1 rounded-full bg-brand-magenta" />
-          SYSTEM METRICS SYNCED
+        <div className="mt-1 sm:mt-0 text-[8px] uppercase tracking-widest flex items-center gap-1.5 font-light">
+          <span className="w-1 h-1 rounded-full bg-brand-magenta animate-pulse" />
+          SYSTEM DIAGNOSTIC COMPLETE
         </div>
       </div>
 

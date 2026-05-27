@@ -28,7 +28,7 @@ export default function SlideConversion() {
   const scales = ["$50k - $100k", "$100k - $250k", "$250k+"];
 
   return (
-    <div className="relative w-full h-full flex flex-col justify-between p-6 md:p-12 bg-[#0A0A0A] bg-grid-dots overflow-hidden">
+    <div className="relative w-full h-full flex flex-col justify-between p-6 md:p-12 bg-transparent overflow-hidden">
       
       {/* Ambient background blur */}
       <div className="absolute bottom-1/3 right-1/4 w-[300px] h-[300px] bg-gradient-to-br from-brand-magenta/5 via-brand-purple/5 to-transparent rounded-full blur-[80px] pointer-events-none opacity-30" />
@@ -36,14 +36,14 @@ export default function SlideConversion() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center z-10 w-full pt-10">
         <div>
-          <span className="text-[9px] uppercase tracking-[0.25em] font-mono text-brand-violet">
-            COMMUNICATIONS
+          <span className="text-[9px] uppercase tracking-[0.25em] font-mono text-brand-violet font-light">
+            03 // INITIALIZE
           </span>
-          <h2 className="text-xl md:text-2xl font-montserrat font-light tracking-tight mt-1 text-white">
-            CONVERSION MATRIX
+          <h2 className="text-xl md:text-2xl font-poppins font-bold tracking-tight mt-1 text-white">
+            Hablemos de tu próximo salto tecnológico.
           </h2>
         </div>
-        <div className="mt-1 sm:mt-0 text-[8px] text-gray-600 font-mono">
+        <div className="mt-1 sm:mt-0 text-[8px] text-gray-600 font-mono font-light">
           Encrypted TLS channel active.
         </div>
       </div>
@@ -57,10 +57,10 @@ export default function SlideConversion() {
             {!submitted ? (
               <form key="form" onSubmit={handleSubmit} className="space-y-6">
                 
-                {/* 01. Objective selector */}
+                {/* 01. Objective selector (Project Scope) */}
                 <div className="space-y-2">
-                  <label className="text-[8px] font-mono uppercase tracking-[0.2em] text-gray-500 block">
-                    01. Objective
+                  <label className="text-[8px] font-mono uppercase tracking-[0.2em] text-gray-500 block font-light">
+                    [ Project Scope ]
                   </label>
                   <div className="flex flex-wrap gap-2">
                     {objectives.map((obj) => (
@@ -69,7 +69,7 @@ export default function SlideConversion() {
                         key={obj}
                         onClick={() => setObjective(obj)}
                         data-cursor="pointer"
-                        className="px-3 py-1.5 text-[9px] font-mono tracking-widest rounded border transition-all duration-300"
+                        className="px-3 py-1.5 text-[9px] font-mono tracking-widest rounded border transition-all duration-300 font-light"
                         style={{
                           borderColor: objective === obj ? "rgba(168, 85, 247, 0.6)" : "rgba(255,255,255,0.06)",
                           backgroundColor: objective === obj ? "rgba(168, 85, 247, 0.05)" : "transparent",
@@ -84,7 +84,7 @@ export default function SlideConversion() {
 
                 {/* 02. Scale selector */}
                 <div className="space-y-2">
-                  <label className="text-[8px] font-mono uppercase tracking-[0.2em] text-gray-500 block">
+                  <label className="text-[8px] font-mono uppercase tracking-[0.2em] text-gray-500 block font-light">
                     02. Scope Scale
                   </label>
                   <div className="flex flex-wrap gap-2">
@@ -94,7 +94,7 @@ export default function SlideConversion() {
                         key={s}
                         onClick={() => setScale(s)}
                         data-cursor="pointer"
-                        className="px-3 py-1.5 text-[9px] font-mono tracking-widest rounded border transition-all duration-300"
+                        className="px-3 py-1.5 text-[9px] font-mono tracking-widest rounded border transition-all duration-300 font-light"
                         style={{
                           borderColor: scale === s ? "rgba(236, 72, 153, 0.6)" : "rgba(255,255,255,0.06)",
                           backgroundColor: scale === s ? "rgba(236, 72, 153, 0.05)" : "transparent",
@@ -109,7 +109,7 @@ export default function SlideConversion() {
 
                 {/* 03. Delicate Underlined Credentials Inputs */}
                 <div className="space-y-4 pt-2">
-                  <label className="text-[8px] font-mono uppercase tracking-[0.2em] text-gray-500 block">
+                  <label className="text-[8px] font-mono uppercase tracking-[0.2em] text-gray-500 block font-light">
                     03. Core Credentials
                   </label>
                   
@@ -117,28 +117,28 @@ export default function SlideConversion() {
                     <input
                       required
                       type="text"
-                      placeholder="Lead Executive Name"
+                      placeholder="[ Name ]"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full bg-transparent border-b border-white/10 border-t-0 border-x-0 rounded-none px-0 py-2 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-brand-purple transition-colors focus:ring-0 focus:ring-offset-0"
+                      className="w-full bg-transparent border-b border-white/10 border-t-0 border-x-0 rounded-none px-0 py-2 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-brand-purple transition-colors focus:ring-0 focus:ring-offset-0 font-light"
                     />
                     <input
                       required
                       type="text"
-                      placeholder="Corporate Entity"
+                      placeholder="[ Company ]"
                       value={company}
                       onChange={(e) => setCompany(e.target.value)}
-                      className="w-full bg-transparent border-b border-white/10 border-t-0 border-x-0 rounded-none px-0 py-2 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-brand-purple transition-colors focus:ring-0 focus:ring-offset-0"
+                      className="w-full bg-transparent border-b border-white/10 border-t-0 border-x-0 rounded-none px-0 py-2 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-brand-purple transition-colors focus:ring-0 focus:ring-offset-0 font-light"
                     />
                   </div>
 
                   <input
                     required
                     type="email"
-                    placeholder="Communications Terminal (E-mail)"
+                    placeholder="[ Secure Email ]"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full bg-transparent border-b border-white/10 border-t-0 border-x-0 rounded-none px-0 py-2 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-brand-purple transition-colors focus:ring-0 focus:ring-offset-0"
+                    className="w-full bg-transparent border-b border-white/10 border-t-0 border-x-0 rounded-none px-0 py-2 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-brand-purple transition-colors focus:ring-0 focus:ring-offset-0 font-light"
                   />
                 </div>
 
@@ -147,7 +147,7 @@ export default function SlideConversion() {
                   type="submit"
                   disabled={loading}
                   data-cursor="pointer"
-                  className="group w-full relative py-3 border border-white/10 hover:border-white/35 bg-[#0C0C0C] text-xs font-mono tracking-widest text-white transition-all duration-300 active:scale-99"
+                  className="group w-full relative py-3 border border-white/10 hover:border-white/35 bg-[#0C0C0C] text-xs font-mono tracking-widest text-white transition-all duration-300 active:scale-99 font-light"
                 >
                   <span className="flex items-center justify-center gap-2">
                     {loading ? (
@@ -157,7 +157,7 @@ export default function SlideConversion() {
                       </>
                     ) : (
                       <>
-                        ESTABLISH HANDSHAKE
+                        [ INITIALIZE PROJECT ]
                         <Send className="w-3.5 h-3.5 text-brand-purple transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                       </>
                     )}
@@ -170,14 +170,14 @@ export default function SlideConversion() {
                 <div className="inline-flex p-2.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
                   <CheckCircle2 className="w-6 h-6" />
                 </div>
-                <h3 className="text-md font-montserrat font-light text-white tracking-wide uppercase">
+                <h3 className="text-md font-poppins font-bold text-white tracking-wide uppercase">
                   CONNECTION ESTABLISHED
                 </h3>
-                <p className="text-[10px] text-gray-500 font-sans leading-relaxed max-w-sm mx-auto">
+                <p className="text-[10px] text-gray-500 font-sans leading-relaxed max-w-sm mx-auto font-light">
                   Credentials accepted. An architect has been dispatched.
                 </p>
                 
-                <div className="max-w-md mx-auto p-3.5 rounded border border-emerald-500/10 bg-emerald-500/5 text-[9px] text-emerald-400/80 text-left space-y-0.5">
+                <div className="max-w-md mx-auto p-3.5 rounded border border-emerald-500/10 bg-emerald-500/5 text-[9px] text-emerald-400/80 text-left space-y-0.5 font-light">
                   <div>[SYS]: PROTOCOL TLS_1.3 INITIALIZED</div>
                   <div>[SYS]: ENCRYPTED ID: KUVE-{Math.floor(1000 + Math.random()*9000)}-SEC</div>
                   <div>[SYS]: TARGET: {name.toUpperCase()} @ {company.toUpperCase()}</div>
@@ -186,7 +186,7 @@ export default function SlideConversion() {
                 <button
                   onClick={() => setSubmitted(false)}
                   data-cursor="pointer"
-                  className="px-4 py-2 border border-white/10 bg-white/5 text-[9px] text-white tracking-widest uppercase hover:bg-white/10 transition-all font-mono"
+                  className="px-4 py-2 border border-white/10 bg-white/5 text-[9px] text-white tracking-widest uppercase hover:bg-white/10 transition-all font-mono font-light"
                 >
                   Return
                 </button>
@@ -204,11 +204,11 @@ export default function SlideConversion() {
               <span className="font-semibold uppercase tracking-wider text-[10px]">CORE SPECIFICATION</span>
             </div>
 
-            <p className="text-gray-500 leading-relaxed font-sans text-[11px]">
+            <p className="text-gray-500 leading-relaxed font-sans text-[11px] font-light">
               All communication channels are encrypted and sandboxed, guaranteeing intellectual asset preservation.
             </p>
 
-            <div className="space-y-3">
+            <div className="space-y-3 font-light">
               <div className="flex items-start gap-2">
                 <ShieldCheck className="w-3.5 h-3.5 text-brand-violet shrink-0 mt-0.5" />
                 <div>
@@ -233,7 +233,7 @@ export default function SlideConversion() {
             </div>
           </div>
 
-          <div className="border-t border-white/5 pt-4 mt-4 flex justify-between items-center uppercase tracking-wider">
+          <div className="border-t border-white/5 pt-4 mt-4 flex justify-between items-center uppercase tracking-wider font-light">
             <span>[HOST]: KUVE.CL</span>
             <span className="text-emerald-500">SYS: STABLE</span>
           </div>
@@ -243,11 +243,11 @@ export default function SlideConversion() {
 
       {/* Footer */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-t border-white/5 pt-4 z-10 w-full">
-        <div className="text-[9px] font-mono text-gray-600 uppercase tracking-widest">
+        <div className="text-[9px] font-mono text-gray-600 uppercase tracking-widest font-light">
           // CHANNELS SECURED UNDER TLS V1.3 METADATA COMPLIANT HANDSHAKE.
         </div>
-        <div className="mt-1 sm:mt-0 text-[8px] font-mono text-gray-500 uppercase tracking-widest">
-          SANTIAGO, METROPOLITANA, CL.
+        <div className="mt-1 sm:mt-0 text-[8px] font-mono text-gray-500 uppercase tracking-widest font-light">
+          KUVE.CL
         </div>
       </div>
 

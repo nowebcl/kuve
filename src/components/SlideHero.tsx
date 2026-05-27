@@ -8,7 +8,7 @@ interface SlideHeroProps {
 }
 
 export default function SlideHero({ onInitiateProject }: SlideHeroProps) {
-  const headingText = "GLOBAL TECH, ENGINEERED BY EXPERTS.";
+  const headingText = "NEXT-GENERATION TECH DEVELOPMENT";
   const words = headingText.split(" ");
 
   const containerVariants = {
@@ -47,7 +47,7 @@ export default function SlideHero({ onInitiateProject }: SlideHeroProps) {
           className="flex items-center gap-2"
         >
           <span className="h-1.5 w-1.5 rounded-full bg-brand-violet animate-pulse" />
-          <span className="text-[9px] uppercase tracking-[0.25em] font-mono text-gray-500">
+          <span className="text-[9px] uppercase tracking-[0.25em] font-mono text-gray-500 font-light">
             SYS.RUNNING // AI_EXPERIENCE
           </span>
         </motion.div>
@@ -61,7 +61,7 @@ export default function SlideHero({ onInitiateProject }: SlideHeroProps) {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center bg-transparent mb-8 overflow-hidden select-none pointer-events-none"
+          className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center bg-transparent mb-6 overflow-hidden select-none pointer-events-none"
         >
           <img 
             src="/logo.png" 
@@ -70,12 +70,22 @@ export default function SlideHero({ onInitiateProject }: SlideHeroProps) {
           />
         </motion.div>
 
-        {/* Sleek Poppins/Montserrat Thin Heading */}
+        {/* Eyebrow Text */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-[10px] font-mono uppercase tracking-[0.4em] text-brand-violet mb-3 font-light"
+        >
+          KUVE
+        </motion.div>
+
+        {/* Sleek Poppins Bold Heading */}
         <motion.h1
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="text-3xl sm:text-5xl md:text-[3.5rem] font-montserrat font-thin tracking-tight leading-[1.05] text-white select-none"
+          className="text-3xl sm:text-5xl md:text-[3.5rem] font-poppins font-bold tracking-tight leading-[1.05] text-white select-none"
         >
           {words.map((word, idx) => (
             <span key={idx} className="inline-block mr-3 md:mr-4 overflow-hidden">
@@ -110,10 +120,10 @@ export default function SlideHero({ onInitiateProject }: SlideHeroProps) {
           <button
             onClick={onInitiateProject}
             data-cursor="pointer"
-            className="group relative px-6 py-3 rounded border border-white/10 hover:border-white/30 bg-[#0B0B0B]/85 text-xs font-mono tracking-widest text-white transition-all duration-300 active:scale-98"
+            className="group relative px-6 py-3 rounded border border-white/10 hover:border-white/30 bg-[#0B0B0B]/85 text-xs font-mono tracking-widest text-white transition-all duration-300 active:scale-98 font-light"
           >
             <span className="flex items-center gap-3">
-              INITIATE PROJECT 
+              [ ENTER SYSTEMS ] 
               <ArrowRight className="w-3 h-3 text-brand-purple transition-transform duration-300 group-hover:translate-x-1" />
             </span>
           </button>
@@ -122,12 +132,12 @@ export default function SlideHero({ onInitiateProject }: SlideHeroProps) {
 
       {/* Bottom status indicators */}
       <div className="w-full flex flex-col sm:flex-row items-center justify-between border-t border-white/5 pt-4 z-10 gap-2">
-        <div className="flex gap-6 text-[9px] font-mono text-[#4C4C4C] uppercase tracking-widest">
+        <div className="flex gap-6 text-[9px] font-mono text-[#4C4C4C] uppercase tracking-widest font-light">
           <div>// LOC: SANTIAGO, CL</div>
           <div>// COMPLIANCE: SOC2</div>
         </div>
         
-        <div className="text-[8px] font-mono text-gray-600 tracking-widest uppercase flex items-center gap-1">
+        <div className="text-[8px] font-mono text-gray-600 tracking-widest uppercase flex items-center gap-1 font-light">
           <Terminal className="w-2.5 h-2.5" />
           SWIPE OR SCROLL TO ENTER
         </div>

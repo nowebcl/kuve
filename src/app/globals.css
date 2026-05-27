@@ -3,8 +3,7 @@
 :root {
   --background: #0A0A0A;
   --foreground: #F3F4F6;
-  --font-poppins: var(--font-poppins);
-  --font-inter: var(--font-inter);
+  --font-proxima: "Proxima Nova", var(--font-inter), sans-serif;
 }
 
 @theme {
@@ -14,9 +13,9 @@
   --color-brand-purple: #A855F7;
   --color-brand-magenta: #EC4899;
   
-  --font-poppins: var(--font-poppins);
-  --font-montserrat: var(--font-poppins);
-  --font-sans: var(--font-inter);
+  --font-poppins: var(--font-proxima);
+  --font-montserrat: var(--font-proxima);
+  --font-sans: var(--font-proxima);
 }
 
 /* Rigid Canvas Setup */
@@ -29,7 +28,7 @@ body {
   overflow: hidden;
   background-color: #0A0A0A;
   color: #F3F4F6;
-  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-proxima), system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   touch-action: none;
