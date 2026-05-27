@@ -75,20 +75,10 @@ export default function SlideHero({ onInitiateProject }: SlideHeroProps) {
             initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.35 }}
-            className="text-brand-purple text-xs font-mono tracking-[0.3em] font-light mt-3.5 lowercase"
+            className="text-brand-purple text-xs font-mono tracking-[0.3em] font-light mt-1 lowercase"
           >
             kuve.dev
           </motion.div>
-        </motion.div>
-
-        {/* Eyebrow Text */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-[10px] font-mono uppercase tracking-[0.4em] text-brand-violet mb-3 font-normal"
-        >
-          KUVE
         </motion.div>
 
         {/* Sleek Poppins Bold Heading */}
