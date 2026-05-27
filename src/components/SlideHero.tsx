@@ -56,18 +56,30 @@ export default function SlideHero({ onInitiateProject }: SlideHeroProps) {
       {/* Main Centered Content Area */}
       <div className="my-auto max-w-4xl z-10 flex flex-col items-center text-center">
         
-        {/* Large Centered Brand Logo */}
+        {/* Large Centered Brand Logo with Hologram Effect */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center bg-transparent mb-6 overflow-hidden select-none pointer-events-none"
+          className="flex flex-col items-center select-none pointer-events-none mb-8"
         >
-          <img 
-            src="/logo.png" 
-            alt="KUVE Brand Symbol" 
-            className="w-full h-full object-contain filter drop-shadow(0 0 15px rgba(168, 85, 247, 0.4))"
-          />
+          <div className="w-28 h-28 md:w-36 md:h-36 flex items-center justify-center bg-transparent animate-logo-hologram">
+            <img 
+              src="/logo.png" 
+              alt="KUVE Brand Symbol" 
+              className="w-full h-full object-contain"
+            />
+          </div>
+
+          {/* Purple kuve.dev Text directly below the logo */}
+          <motion.div
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.35 }}
+            className="text-brand-purple text-xs font-mono tracking-[0.3em] font-light mt-3.5 lowercase"
+          >
+            kuve.dev
+          </motion.div>
         </motion.div>
 
         {/* Eyebrow Text */}

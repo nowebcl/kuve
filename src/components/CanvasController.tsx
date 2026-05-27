@@ -195,23 +195,12 @@ export default function CanvasController() {
       {/* Floating Minimalist Header Nav */}
       <header className="fixed top-0 left-0 right-0 h-16 z-[50] flex items-center justify-between px-6 md:px-12 pointer-events-none">
         
-        {/* Delicate geometric logo */}
+        {/* Empty left anchor to preserve structural alignment */}
         <div 
           onClick={() => jumpToSlide(0)}
           data-cursor="pointer"
-          className="flex items-center gap-3.5 pointer-events-auto cursor-pointer"
-        >
-          <div className="w-9 h-9 flex items-center justify-center bg-transparent overflow-hidden">
-            <img 
-              src="/logo.png" 
-              alt="KUVE Logo" 
-              className="w-full h-full object-contain filter drop-shadow(0 0 6px rgba(168, 85, 247, 0.45))"
-            />
-          </div>
-          <span className="font-montserrat font-light tracking-[0.35em] text-[13px] text-white select-none transition-colors duration-300 hover:text-brand-violet">
-            KUVE
-          </span>
-        </div>
+          className="w-9 h-9 pointer-events-auto cursor-pointer"
+        />
 
         {/* Minimal Terminal section route */}
         <div className="hidden md:flex items-center gap-2 text-gray-500 font-mono text-[9px] select-none">
