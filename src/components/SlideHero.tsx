@@ -60,7 +60,7 @@ export default function SlideHero({ onInitiateProject }: SlideHeroProps) {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex flex-col items-center select-none pointer-events-none mb-8"
+          className="flex flex-col items-center select-none pointer-events-none mb-8 pt-8 md:pt-12"
         >
           <div className="w-28 h-28 md:w-36 md:h-36 flex items-center justify-center bg-transparent animate-logo-hologram">
             <img 
