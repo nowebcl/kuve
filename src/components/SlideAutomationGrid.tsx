@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Cpu, Database, Radio, GitMerge, BarChart3, Network } from "lucide-react";
+import { Cpu, Search, FileCode, ShieldCheck, Terminal, Bot } from "lucide-react";
 
 interface Node {
   id: string;
@@ -14,6 +14,7 @@ interface Node {
   color: string;
   connections: string[];
   details: string[];
+  description: string;
 }
 
 export default function SlideAutomationGrid() {
@@ -21,59 +22,64 @@ export default function SlideAutomationGrid() {
 
   const nodes: Node[] = [
     {
-      id: "ingest",
-      title: "Real-time Ingest",
-      role: "IOT GATEWAY",
-      icon: Radio,
+      id: "researcher",
+      title: "Agente de Investigación",
+      role: "ANÁLISIS DE REQUERIMIENTOS",
+      icon: Search,
       x: 18,
       y: 35,
       color: "#6366F1",
-      connections: ["core"],
-      details: ["HTTP/Websocket channels", "Sub-5ms global latency"],
+      connections: ["director"],
+      details: ["Búsqueda semántica en bases de código", "Escaneo de APIs y librerías"],
+      description: "Explora la estructura del proyecto y define los requerimientos lógicos iniciales.",
     },
     {
-      id: "api",
-      title: "Secure API Mesh",
-      role: "PROTOCOLS",
-      icon: GitMerge,
+      id: "writer",
+      title: "Agente de Código",
+      role: "GENERACIÓN DE SOFTWARE",
+      icon: FileCode,
       x: 18,
       y: 65,
       color: "#EC4899",
-      connections: ["core", "analytics"],
-      details: ["gRPC & GraphQL", "Firewall token filters"],
+      connections: ["director", "security"],
+      details: ["Refactorización y escritura de componentes", "Resolución automática de sintaxis"],
+      description: "Escribe código de forma óptima bajo los lineamientos y patrones de diseño seleccionados.",
     },
     {
-      id: "core",
-      title: "Cognitive AI Core",
-      role: "AGENTS",
-      icon: Cpu,
+      id: "director",
+      title: "Agente de Orquestación",
+      role: "PLANIFICACIÓN CENTRAL",
+      icon: Bot,
       x: 50,
       y: 50,
       color: "#A855F7",
-      connections: ["ingest", "api", "db", "analytics"],
-      details: ["Auto-routing LLM mesh", "Heuristic self-healing"],
+      connections: ["researcher", "writer", "tester", "security"],
+      details: ["División de objetivos en subtareas", "Dirección y monitoreo de procesos"],
+      description: "Modela la lógica principal, delega tareas específicas y valida el flujo general.",
     },
     {
-      id: "db",
-      title: "Enterprise Sync",
-      role: "SAP MIRROR",
-      icon: Database,
+      id: "tester",
+      title: "Agente de Validación",
+      role: "PRUEBAS DE ENTORNO",
+      icon: Terminal,
       x: 82,
       y: 35,
       color: "#3B82F6",
-      connections: ["core"],
-      details: ["SAP ERP dynamic mirror", "Continuous hot ledger"],
+      connections: ["director"],
+      details: ["Ejecución de pruebas automatizadas", "Verificación visual en navegadores"],
+      description: "Ejecuta planes de pruebas exhaustivos para asegurar la estabilidad del producto.",
     },
     {
-      id: "analytics",
-      title: "Analytics Vault",
-      role: "INTEL CORE",
-      icon: BarChart3,
+      id: "security",
+      title: "Agente de Seguridad",
+      role: "COMPATIBILIDAD Y CIFRADO",
+      icon: ShieldCheck,
       x: 82,
       y: 65,
       color: "#14B8A6",
-      connections: ["core", "api"],
-      details: ["Vector anomaly metrics", "Daily forecast models"],
+      connections: ["director", "writer"],
+      details: ["Auditoría de vulnerabilidades estáticas", "Cifrado y protección de credenciales"],
+      description: "Inspecciona el código resultante para garantizar que cumpla con los estándares de seguridad.",
     },
   ];
 
@@ -94,16 +100,16 @@ export default function SlideAutomationGrid() {
       />
 
       {/* Header with Centered/Left-aligned copy deck */}
-      <div className="flex flex-col justify-start items-start z-10 w-full pt-10">
+      <div className="flex flex-col justify-start items-start z-10 w-full pt-10 px-2">
         <div>
-          <span className="text-[9px] uppercase tracking-[0.25em] font-mono text-brand-purple font-light">
-            01 // CORE ARCHITECTURE
+          <span className="text-[9px] uppercase tracking-[0.25em] font-sans text-brand-purple font-semibold">
+            01 // ARQUITECTURA DE INTEGRACIÓN
           </span>
-          <h2 className="text-xl md:text-2xl font-poppins font-bold tracking-tight mt-1 text-white">
-            Ingeniería de Software sin Concesiones.
+          <h2 className="text-xl md:text-2xl font-poppins font-bold tracking-tight mt-1 transition-colors duration-300" style={{ color: "var(--text-primary)" }}>
+            Orquestación de Procesos Inteligentes.
           </h2>
-          <p className="text-xs text-[#8E8E8E] font-light max-w-2xl mt-2 font-sans leading-relaxed">
-            Diseñamos y automatizamos la infraestructura digital de corporaciones globales. Aplicaciones robustas, arquitectura escalable y automatización inteligente ejecutada por expertos.
+          <p className="text-xs font-light max-w-2xl mt-2 font-sans leading-relaxed transition-colors duration-300" style={{ color: "var(--text-secondary)" }}>
+            Nuestra estructura coordina flujos de desarrollo mediante especializaciones de software que cooperan entre sí. Cada fase es dirigida de manera estable, asegurando solidez en la entrega final.
           </p>
         </div>
       </div>
@@ -125,15 +131,16 @@ export default function SlideAutomationGrid() {
                     y1={`${node.y}%`}
                     x2={`${targetNode.x}%`}
                     y2={`${targetNode.y}%`}
-                    stroke="rgba(255, 255, 255, 0.04)"
+                    stroke="var(--panel-border)"
                     strokeWidth="1"
+                    opacity="0.3"
                   />
                   <line
                     x1={`${node.x}%`}
                     y1={`${node.y}%`}
                     x2={`${targetNode.x}%`}
                     y2={`${targetNode.y}%`}
-                    stroke={isFlowing ? node.color : "rgba(255, 255, 255, 0.08)"}
+                    stroke={isFlowing ? node.color : "var(--panel-border)"}
                     strokeWidth="1.2"
                     strokeDasharray={isFlowing ? "6 4" : "10 8"}
                     style={{
@@ -155,8 +162,12 @@ export default function SlideAutomationGrid() {
           return (
             <div
               key={node.id}
-              className="absolute -translate-x-1/2 -translate-y-1/2"
-              style={{ left: `${node.x}%`, top: `${node.y}%` }}
+              className="absolute -translate-x-1/2 -translate-y-1/2 animate-gentle-float"
+              style={{ 
+                left: `${node.x}%`, 
+                top: `${node.y}%`,
+                animationDelay: `${node.id === "director" ? 0 : node.id === "researcher" ? 1 : 2}s`
+              }}
               onMouseEnter={() => setHoveredNode(node.id)}
               onMouseLeave={() => setHoveredNode(null)}
             >
@@ -166,26 +177,27 @@ export default function SlideAutomationGrid() {
               >
                 {/* Micro Border card */}
                 <div 
-                  className="flex items-center gap-3 px-3.5 py-2.5 rounded border bg-[#0C0C0C]/90 backdrop-blur-md transition-all duration-300"
+                  className="flex items-center gap-3 px-3.5 py-2.5 rounded border transition-all duration-300 shadow-sm"
                   style={{
-                    borderColor: isNodeHovered ? node.color : "rgba(255,255,255,0.06)",
-                    boxShadow: isNodeHovered ? `0 0 12px ${node.color}15` : "none",
+                    backgroundColor: "var(--panel-bg)",
+                    borderColor: isNodeHovered ? node.color : "var(--panel-border)",
+                    boxShadow: isNodeHovered ? `0 0 16px ${node.color}20` : "none",
                   }}
                 >
                   <div 
                     className="p-1.5 rounded transition-colors duration-300"
                     style={{
-                      backgroundColor: isNodeHovered ? `${node.color}15` : "rgba(255,255,255,0.03)",
-                      color: isNodeHovered ? node.color : "rgba(255,255,255,0.4)",
+                      backgroundColor: isNodeHovered ? `${node.color}15` : "rgba(168,85,247,0.02)",
+                      color: isNodeHovered ? node.color : "var(--text-muted)",
                     }}
                   >
                     <Icon className="w-3.5 h-3.5" />
                   </div>
                   <div>
-                    <h3 className="text-[8px] font-mono tracking-widest text-gray-600 leading-none font-light">
+                    <h3 className="text-[8px] font-sans tracking-wider leading-none font-semibold" style={{ color: "var(--text-muted)" }}>
                       {node.role}
                     </h3>
-                    <p className="text-xs font-light tracking-wide text-white mt-1">
+                    <p className="text-xs font-medium tracking-wide mt-1 transition-colors duration-300" style={{ color: "var(--text-primary)" }}>
                       {node.title}
                     </p>
                   </div>
@@ -197,7 +209,7 @@ export default function SlideAutomationGrid() {
       </div>
 
       {/* Structured Minimal Diagnostic Bar */}
-      <div className="h-12 z-10 w-full border-t border-white/5 flex items-center justify-between px-2 font-mono text-[9px] text-[#4E4E4E] overflow-hidden">
+      <div className="h-14 z-10 w-full border-t flex items-center justify-between px-2 font-sans text-[10px] overflow-hidden" style={{ borderColor: "var(--panel-border)", color: "var(--text-muted)" }}>
         <AnimatePresence mode="wait">
           {hoveredNode ? (
             <motion.div
@@ -205,24 +217,26 @@ export default function SlideAutomationGrid() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="flex-1 flex flex-row items-center justify-between"
+              className="flex-1 flex flex-col md:flex-row md:items-center justify-between gap-1"
             >
               <div className="flex items-center gap-2">
                 <span 
-                  className="px-1.5 py-0.5 rounded text-[8px] font-light"
+                  className="px-2 py-0.5 rounded text-[8px] font-bold font-sans tracking-wide uppercase"
                   style={{
                     backgroundColor: `${nodes.find(n => n.id === hoveredNode)?.color}15`,
                     color: nodes.find(n => n.id === hoveredNode)?.color
                   }}
                 >
-                  SYS:{hoveredNode.toUpperCase()}
+                  {nodes.find(n => n.id === hoveredNode)?.title}
                 </span>
-                <span className="text-[#8E8E8E] hidden md:inline font-light">Synchronous dynamic routing validation core.</span>
+                <span className="font-sans text-[10px] font-normal" style={{ color: "var(--text-secondary)" }}>
+                  {nodes.find(n => n.id === hoveredNode)?.description}
+                </span>
               </div>
 
               <div className="flex gap-4">
                 {nodes.find(n => n.id === hoveredNode)?.details.map((detail, i) => (
-                  <div key={i} className="flex items-center gap-1.5 text-gray-400 font-light">
+                  <div key={i} className="flex items-center gap-1.5 text-gray-400 font-normal text-[9px]" style={{ color: "var(--text-secondary)" }}>
                     <span 
                       className="w-1 h-1 rounded-full" 
                       style={{ backgroundColor: nodes.find(n => n.id === hoveredNode)?.color }}
@@ -237,14 +251,14 @@ export default function SlideAutomationGrid() {
               key="default"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="flex items-center justify-between w-full font-mono text-[9px]"
+              className="flex items-center justify-between w-full font-sans text-[10px]"
             >
-              <div className="flex items-center gap-2 text-brand-purple">
+              <div className="flex items-center gap-2 text-brand-purple font-semibold">
                 <span className="h-1.5 w-1.5 rounded-full bg-brand-purple animate-pulse" />
-                STATUS: SYSTEM_ACTIVE
+                SISTEMA OPERATIVO ACTIVO
               </div>
-              <div className="text-gray-600 font-light">
-                EFFICIENCY: OPTIMIZING_OPERATIONS_100%
+              <div className="font-normal" style={{ color: "var(--text-muted)" }}>
+                CONEXIÓN DE RED ESTABLE // ESCALA EMPRESARIAL
               </div>
             </motion.div>
           )}

@@ -1,9 +1,38 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0A0A0A;
+  --background: #060606;
   --foreground: #F3F4F6;
-  --font-proxima: "Proxima Nova", var(--font-inter), sans-serif;
+  --panel-bg: rgba(8, 8, 8, 0.7);
+  --panel-border: rgba(255, 255, 255, 0.04);
+  
+  --text-primary: #FFFFFF;
+  --text-secondary: #8E8E8E;
+  --text-muted: #4E4E4E;
+  
+  --grid-color: rgba(255, 255, 255, 0.02);
+  --grid-dots: rgba(255, 255, 255, 0.03);
+  --glow-opacity: 0.3;
+  --card-glow-intensity: 0.12;
+  
+  --font-inter: var(--font-inter), sans-serif;
+  --font-poppins: var(--font-poppins), sans-serif;
+}
+
+html.light {
+  --background: #FFFFFF;
+  --foreground: #0F172A;
+  --panel-bg: rgba(255, 255, 255, 0.85);
+  --panel-border: rgba(15, 23, 42, 0.05);
+  
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+  
+  --grid-color: rgba(15, 23, 42, 0.012);
+  --grid-dots: rgba(15, 23, 42, 0.015);
+  --glow-opacity: 0.01;
+  --card-glow-intensity: 0.01;
 }
 
 @theme {
@@ -13,9 +42,16 @@
   --color-brand-purple: #A855F7;
   --color-brand-magenta: #EC4899;
   
-  --font-poppins: var(--font-proxima);
-  --font-montserrat: var(--font-proxima);
-  --font-sans: var(--font-proxima);
+  --font-poppins: var(--font-poppins);
+  --font-montserrat: var(--font-inter);
+  --font-sans: var(--font-inter);
+}
+
+/* Transitions for dynamic theme switching */
+html, body, div, header, section, input, button, select, p, h1, h2, h3, h4, span {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 400ms;
 }
 
 /* Rigid Canvas Setup */
@@ -26,9 +62,9 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: #0A0A0A;
-  color: #F3F4F6;
-  font-family: var(--font-proxima), system-ui, -apple-system, sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   touch-action: none;
@@ -56,9 +92,10 @@ body {
 /* Glowing Border Helper Utility */
 .gradient-border-glow {
   position: relative;
-  background: linear-gradient(135deg, #0A0A0A, #121212);
+  background: var(--panel-bg);
   border-radius: 12px;
   z-index: 1;
+  border: 1px solid var(--panel-border);
 }
 
 .gradient-border-glow::before {
@@ -76,45 +113,116 @@ body {
   mask-composite: exclude;
   z-index: -1;
   transition: opacity 0.5s ease;
-  opacity: 0.5;
+  opacity: 0.3;
 }
 
 .gradient-border-glow:hover::before {
-  opacity: 1;
+  opacity: 0.8;
 }
 
-/* Dot grid background */
-.bg-grid-dots {
-  background-size: 24px 24px;
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+html.light .gradient-border-glow::before {
+  opacity: 0.08;
 }
 
-/* Gentle Floating Animation for Parallax Backdrop */
+/* Dot grid backgrounds */
+.bg-grid-mesh {
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+}
+
+.bg-dot-mesh {
+  background-size: 25px 25px;
+  background-image: radial-gradient(circle, var(--grid-dots) 1px, transparent 1px);
+}
+
+/* Glassmorphic Panel class for HUD & Mockups */
+.glass-hud-panel {
+  background: var(--panel-bg);
+  backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid var(--panel-border);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+}
+
+html.light .glass-hud-panel {
+  box-shadow: 0 10px 40px -20px rgba(0, 0, 0, 0.05);
+}
+
+.glass-hud-panel-active {
+  border-color: rgba(168, 85, 247, 0.25);
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.06);
+}
+
+/* Gentle Floating Animation */
 @keyframes gentle-float {
   0%, 100% {
-    transform: translateY(0px) rotate(0deg) scale(1.05);
+    transform: translateY(0px) rotate(0deg) scale(1.02);
   }
   50% {
-    transform: translateY(-8px) rotate(0.4deg) scale(1.07);
+    transform: translateY(-5px) rotate(0.2deg) scale(1.03);
   }
 }
 
 .animate-gentle-float {
-  animation: gentle-float 22s ease-in-out infinite;
+  animation: gentle-float 16s ease-in-out infinite;
 }
 
 /* Hologram Floating Neon Logo Animation */
 @keyframes logo-hologram {
   0%, 100% {
     transform: translateY(0px) scale(1) rotate(0deg);
-    filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.35));
+    filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.25));
   }
   50% {
-    transform: translateY(-10px) scale(1.06) rotate(0.8deg);
-    filter: drop-shadow(0 0 28px rgba(236, 72, 153, 0.6));
+    transform: translateY(-8px) scale(1.04) rotate(0.5deg);
+    filter: drop-shadow(0 0 20px rgba(236, 72, 153, 0.45));
   }
+}
+
+html.light .animate-logo-hologram {
+  filter: none;
 }
 
 .animate-logo-hologram {
   animation: logo-hologram 6s ease-in-out infinite;
+}
+
+/* Gravity Nodes slow floating drifting */
+@keyframes float-particle-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -40px) scale(1.15); }
+}
+
+@keyframes float-particle-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-25px, -30px) scale(0.9); }
+}
+
+@keyframes float-particle-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(15px, -60px) scale(1.2); }
+}
+
+.animate-float-p1 {
+  animation: float-particle-1 14s ease-in-out infinite;
+}
+
+.animate-float-p2 {
+  animation: float-particle-2 18s ease-in-out infinite;
+}
+
+.animate-float-p3 {
+  animation: float-particle-3 22s ease-in-out infinite;
+}
+
+/* Typing Indicator blinking cursor */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: rgba(168, 85, 247, 0.85); }
+}
+
+.typing-cursor {
+  border-right: 2px solid rgba(168, 85, 247, 0.85);
+  animation: blink-caret .75s step-end infinite;
 }

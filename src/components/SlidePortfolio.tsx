@@ -1,163 +1,143 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
-import { ArrowUpRight, ShieldCheck, Zap, Globe } from "lucide-react";
+import { useState } from "react";
+import { FolderGit2, Shield } from "lucide-react";
 
-interface CaseStudy {
+interface Project {
   id: number;
-  title: string;
-  category: string;
-  tagline: string;
-  metrics: string;
-  metricLabel: string;
+  repoName: string;
+  description: string;
+  languages: { name: string; percent: number; color: string }[];
+  status: "En Proceso" | "Pronto";
   color: string;
-  icon: React.ComponentType<{ className?: string }>;
   systemSpec: string;
 }
 
-function ParallaxCard({ item }: { item: CaseStudy }) {
-  const cardRef = useRef<HTMLDivElement>(null);
+function ParallaxCard({ item }: { item: Project }) {
   const [hovered, setHovered] = useState(false);
 
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  // Very subtle tilt angle (max 6deg) for elegance
-  const springConfig = { damping: 30, stiffness: 250, mass: 0.4 };
-  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [6, -6]), springConfig);
-  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-6, 6]), springConfig);
-
-  const textTranslateX = useSpring(useTransform(x, [-0.5, 0.5], [-5, 5]), springConfig);
-  const textTranslateY = useSpring(useTransform(y, [-0.5, 0.5], [-5, 5]), springConfig);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left - rect.width / 2;
-    const mouseY = e.clientY - rect.top - rect.height / 2;
-    x.set(mouseX / rect.width);
-    y.set(mouseY / rect.height);
-  };
-
-  const handleMouseLeave = () => {
-    setHovered(false);
-    x.set(0);
-    y.set(0);
-  };
-
-  const Icon = item.icon;
-
   return (
-    <motion.div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
+    <div
       onMouseEnter={() => setHovered(true)}
-      onMouseLeave={handleMouseLeave}
+      onMouseLeave={() => setHovered(false)}
       style={{
-        rotateX,
-        rotateY,
-        transformStyle: "preserve-3d",
+        backgroundColor: "var(--panel-bg)",
+        borderColor: hovered ? "rgba(168, 85, 247, 0.25)" : "var(--panel-border)",
       }}
-      className="relative flex-1 h-[320px] rounded border border-white/5 bg-[#0C0C0C]/80 backdrop-blur-md overflow-hidden cursor-pointer select-none transition-colors duration-300 hover:border-white/15"
-      data-cursor="pointer"
+      className="relative flex-1 h-[320px] rounded border bg-transparent overflow-hidden cursor-pointer select-none transition-colors duration-300 w-full max-w-sm flex flex-col justify-between p-6"
     >
+      {/* Background highlight glow */}
       <div 
         className="absolute inset-0 transition-opacity duration-500 pointer-events-none"
         style={{
-          background: `radial-gradient(circle at 50% 120%, ${item.color}08 0%, transparent 60%)`,
-          opacity: hovered ? 1 : 0.3,
+          background: `radial-gradient(circle at 50% 120%, ${item.color}15 0%, transparent 65%)`,
+          opacity: hovered ? 1 : 0.2,
         }}
       />
 
-      <div className="absolute inset-0 p-6 flex flex-col justify-between" style={{ transform: "translateZ(20px)", transformStyle: "preserve-3d" }}>
+      <div className="flex-1 flex flex-col justify-between">
         
-        {/* Top items */}
+        {/* Top Header info */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="p-1 rounded text-white" style={{ backgroundColor: `${item.color}15` }}>
-              <Icon className="w-3.5 h-3.5" />
+            <div className="p-1.5 rounded" style={{ backgroundColor: `${item.color}15`, color: item.color }}>
+              <FolderGit2 className="w-3.5 h-3.5" />
             </div>
-            <span className="text-[8px] font-mono uppercase tracking-[0.2em] text-gray-500 font-light">
-              {item.category}
+            <span className="text-[10px] font-sans tracking-wide font-medium" style={{ color: "var(--text-muted)" }}>
+              Tecnología Activa
             </span>
           </div>
-          <ArrowUpRight className="w-4 h-4 text-gray-600 transition-colors duration-300 group-hover:text-white" />
+          
+          {/* Status Badge */}
+          {item.status === "En Proceso" ? (
+            <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded border border-blue-500/20 bg-blue-500/5 text-[8px] font-sans font-semibold tracking-wide text-blue-500 dark:text-blue-400 uppercase">
+              <span className="w-1 h-1 rounded-full bg-blue-500 dark:bg-blue-400 animate-pulse" />
+              {item.status}
+            </div>
+          ) : (
+            <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded border border-amber-500/20 bg-amber-500/5 text-[8px] font-sans font-semibold tracking-wide text-amber-500 dark:text-amber-400 uppercase">
+              <span className="w-1 h-1 rounded-full bg-amber-500 dark:bg-amber-400 animate-pulse" />
+              {item.status}
+            </div>
+          )}
         </div>
 
-        {/* Content */}
-        <motion.div 
-          style={{ x: textTranslateX, y: textTranslateY }}
-          className="my-auto space-y-2"
-        >
-          <h3 className="text-lg font-poppins font-bold text-white tracking-wide">
-            {item.title}
+        {/* Content details */}
+        <div className="my-auto space-y-2 pt-4">
+          <h3 className="text-sm font-bold tracking-wide font-sans transition-colors duration-300" style={{ color: "var(--text-primary)" }}>
+            {item.repoName}
           </h3>
-          <p className="text-[11px] text-gray-500 font-sans leading-relaxed font-light">
-            {item.tagline}
+          <p className="text-[11px] font-sans leading-relaxed font-light transition-colors duration-300" style={{ color: "var(--text-secondary)" }}>
+            {item.description}
           </p>
-        </motion.div>
+        </div>
 
-        {/* Bottom Metrics */}
-        <div className="border-t border-white/5 pt-4 flex items-center justify-between">
-          <div>
-            <div className="text-xl font-poppins font-bold text-white">
-              {item.metrics}
-            </div>
-            <div className="text-[8px] font-mono text-gray-600 uppercase tracking-widest mt-0.5 font-light">
-              {item.metricLabel}
-            </div>
+        {/* Dynamic Language breakdown bar */}
+        <div className="space-y-1.5 pt-4">
+          <div className="flex h-1.5 rounded-full overflow-hidden w-full bg-black/10 dark:bg-white/5">
+            {item.languages.map((lang, idx) => (
+              <div
+                key={idx}
+                style={{ width: `${lang.percent}%`, backgroundColor: lang.color }}
+                className="h-full"
+                title={`${lang.name}: ${lang.percent}%`}
+              />
+            ))}
           </div>
-
-          <div className="text-right">
-            <div className="text-[8px] font-mono text-gray-600 tracking-wider font-light">
-              PATH
-            </div>
-            <div className="text-[9px] font-mono text-white tracking-widest mt-0.5 font-light">
-              {item.systemSpec}
-            </div>
+          <div className="flex flex-wrap gap-x-3 gap-y-1 text-[8.5px] font-sans font-medium" style={{ color: "var(--text-secondary)" }}>
+            {item.languages.map((lang, idx) => (
+              <div key={idx} className="flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: lang.color }} />
+                <span>{lang.name} {lang.percent}%</span>
+              </div>
+            ))}
           </div>
         </div>
 
       </div>
-    </motion.div>
+    </div>
   );
 }
 
 export default function SlidePortfolio() {
-  const caseStudies: CaseStudy[] = [
+  const projects: Project[] = [
     {
       id: 1,
-      title: "VORTEX FINTECH CORE",
-      category: "Transaction Sync",
-      tagline: "Autonomous multi-ledger financial pipeline scaling sub-second asset transfers.",
-      metrics: "$14B+",
-      metricLabel: "Processed Annually",
+      repoName: "Vortex Fintech Core",
+      description: "Estructura transaccional distribuida de alta frecuencia. Diseñada para procesamiento financiero multihilo rápido y estable.",
+      languages: [
+        { name: "Go", percent: 68, color: "#00ADD8" },
+        { name: "TypeScript", percent: 22, color: "#3178C6" },
+        { name: "Rust", percent: 10, color: "#DEA584" }
+      ],
+      status: "En Proceso",
       color: "#6366F1",
-      icon: Zap,
-      systemSpec: "SECURE.V3",
+      systemSpec: "VTX.NODE.V4",
     },
     {
       id: 2,
-      title: "ATLAS LOGISTICS MESH",
-      category: "Supply Chain AI",
-      tagline: "Full-network optimization model determining container routes to reduce fuel burn.",
-      metrics: "-42%",
-      metricLabel: "Operational Friction",
+      repoName: "Atlas Logistics Mesh",
+      description: "Modelo de optimización y enrutamiento logístico. Planifica despachos eficientes basados en heurística de red local.",
+      languages: [
+        { name: "Python", percent: 75, color: "#3572A5" },
+        { name: "C++", percent: 20, color: "#F34B7D" },
+        { name: "Shell", percent: 5, color: "#89E051" }
+      ],
+      status: "Pronto",
       color: "#A855F7",
-      icon: Globe,
-      systemSpec: "ATLAS.AI",
+      systemSpec: "ATL.MESH.AI",
     },
     {
       id: 3,
-      title: "TITAN CLOUD AGENTS",
-      category: "Cloud Defense",
-      tagline: "Distributed threat-prevention nodes analyzing system signatures continuously.",
-      metrics: "0ms",
-      metricLabel: "Reaction Lag",
+      repoName: "Titan Cloud Security",
+      description: "Auditoría de ciberseguridad continua e integración automatizada. Monitorea compliance y analiza debilidades críticas.",
+      languages: [
+        { name: "TypeScript", percent: 90, color: "#3178C6" },
+        { name: "Shell", percent: 10, color: "#89E051" }
+      ],
+      status: "En Proceso",
       color: "#EC4899",
-      icon: ShieldCheck,
-      systemSpec: "SHIELD.CORE",
+      systemSpec: "TTN.SHIELD.V2",
     },
   ];
 
@@ -165,36 +145,36 @@ export default function SlidePortfolio() {
     <div className="relative w-full h-full flex flex-col justify-between p-6 md:p-12 bg-transparent overflow-hidden">
       
       {/* Header */}
-      <div className="flex flex-col justify-start items-start z-10 w-full pt-10">
+      <div className="flex flex-col justify-start items-start z-10 w-full pt-10 px-2">
         <div>
-          <span className="text-[9px] uppercase tracking-[0.25em] font-mono text-brand-magenta font-light">
-            02 // VELOCITY OPTIMIZATION
+          <span className="text-[9px] uppercase tracking-[0.25em] font-sans text-brand-magenta font-semibold">
+            02 // CASOS DE DESARROLLO
           </span>
-          <h2 className="text-xl md:text-2xl font-poppins font-bold tracking-tight mt-1 text-white">
-            Velocidad que Desafía la Gravedad.
+          <h2 className="text-xl md:text-2xl font-poppins font-bold tracking-tight mt-1 transition-colors duration-300" style={{ color: "var(--text-primary)" }}>
+            Proyectos en Ejecución.
           </h2>
-          <p className="text-xs text-[#8E8E8E] font-light max-w-2xl mt-2 font-sans leading-relaxed">
-            Cada milisegundo es capital. Desarrollamos soluciones web optimizadas a nivel de bit, garantizando interfaces instantáneas, fluidas y de alto impacto para el usuario final.
+          <p className="text-xs font-light max-w-2xl mt-2 font-sans leading-relaxed transition-colors duration-300" style={{ color: "var(--text-secondary)" }}>
+            Revisa el estado de nuestras soluciones activas. Mantenemos una traza transparente sobre el avance y empaquetamiento de cada módulo.
           </p>
         </div>
       </div>
 
       {/* Cards */}
-      <div className="flex flex-col md:flex-row gap-6 flex-1 items-center justify-center my-4 z-10 w-full perspective-[1000px]">
-        {caseStudies.map((item) => (
+      <div className="flex flex-col md:flex-row gap-6 flex-1 items-center justify-center my-4 z-10 w-full perspective-[1000px] px-2">
+        {projects.map((item) => (
           <ParallaxCard key={item.id} item={item} />
         ))}
       </div>
 
       {/* Footer / Performance Metrics */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-t border-white/5 pt-4 z-10 w-full gap-2 font-mono text-[9px] text-[#4E4E4E]">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-t pt-4 z-10 w-full gap-2 font-sans text-[10px]" style={{ borderColor: "var(--panel-border)", color: "var(--text-muted)" }}>
         <div className="flex gap-4 sm:gap-6 uppercase">
-          <div className="font-light">// GAUGE: SPEED INDEX</div>
-          <div className="text-brand-magenta font-light">// COUNTER: LOAD TIME: 0.23s</div>
+          <div>Integridad de Código</div>
+          <div className="text-brand-magenta font-semibold">Integración y Despliegue Estable</div>
         </div>
-        <div className="mt-1 sm:mt-0 text-[8px] uppercase tracking-widest flex items-center gap-1.5 font-light">
-          <span className="w-1 h-1 rounded-full bg-brand-magenta animate-pulse" />
-          SYSTEM DIAGNOSTIC COMPLETE
+        <div className="mt-1 sm:mt-0 text-[9px] uppercase tracking-wider flex items-center gap-1.5 font-normal" style={{ color: "var(--text-muted)" }}>
+          <Shield className="w-3.5 h-3.5 text-brand-magenta" />
+          Verificación de Plataforma Completada
         </div>
       </div>
 
